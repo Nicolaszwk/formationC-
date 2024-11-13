@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
+using System.Runtime.InteropServices;
 using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,6 +13,9 @@ namespace Serie
     {
         static void Main(string[] args)
         {
+            Console.WriteLine("Serie 1");
+            Console.WriteLine(" ");
+
             BasicOperation(3, 4, '+');
             BasicOperation(6, 2, '/');
             BasicOperation(3, 0, '/');
@@ -34,8 +39,51 @@ namespace Serie
             GoodDay(21);
             Console.WriteLine(" ");
 
+            PyramidConstruction(10, true);
+            Console.WriteLine(" ");
+            PyramidConstruction(12, false);
+            Console.WriteLine(" ");
+
+            Console.WriteLine(Factorial(4));
+            Console.WriteLine(FactorialRecursive(5));
+            Console.WriteLine(" ");
+
+            Console.WriteLine("Serie 2");
+            Console.WriteLine(" ");
+
+            int[] tableau = new int[] { 1, -5, 10, -3, 0, 4, 2, -7 };
+            Console.WriteLine(LinearSearch(tableau, 4));
+            Console.WriteLine(BinarySearch(tableau, 4));
+            Console.WriteLine(" ");
+
+            int[] leftVector = new int[] { 1, 2, 3 };
+            int[] rightVector = new int[] { -1, -4, 0 };
+
+            BuildingMatrix(leftVector, rightVector);
+            Console.WriteLine(" ");
+
+            int[][] matrix1 = new int[][]
+            {
+                new int[] { 1, 2 },
+                new int[] { 4, 6 },
+                new int[] { -1, 8 }
+            };
+
+            int[][] matrix2 = new int[][]
+           {
+                new int[] { -1, 5 },
+                new int[] { -4, 0 },
+                new int[] { 0, 2 }
+           };
+
+            Addition(matrix1, matrix2);
+            Console.WriteLine(" ");
+
+
             Console.ReadKey();
         }
+
+        //Serie 1
 
         // Exercice 1 : Opérations de base
         static void BasicOperation(int a, int b, char operateur)
@@ -152,16 +200,131 @@ namespace Serie
             }
         }
 
-        // Exercice 2 : Horloge parlante
-        //static void PyramidConstruction(int n, bool isSmooth)
-        //{
-        //    int nbrblocs = 0;
+        //Exercice 3 : Construction d'une pyramide
+        static void PyramidConstruction(int n, bool isSmooth)
+        {
+            int nbrblocs = 0;
 
-        //    for (int j = 0; j < n - 1; j++)
-        //    {
-        //        nbrblocs = nbrblocs * 2 + 1;
-                
-        //    }
-        //}
+            for (int j = 0; j < n - 1; j++)
+            {
+                nbrblocs = j * 2 + 1;
+
+                if (isSmooth)
+                {
+
+                    Console.Write(new string(' ', n - j - 1));
+                    Console.Write(new string('+', nbrblocs));
+                    Console.WriteLine();
+                }
+                else
+                {
+                    if (j % 2 != 0)
+                    {
+                        Console.Write(new string(' ', n - j - 1));
+                        Console.Write(new string('-', nbrblocs));
+                        Console.WriteLine();
+                    }
+                    else
+                    {
+                        Console.Write(new string(' ', n - j - 1));
+                        Console.Write(new string('+', nbrblocs));
+                        Console.WriteLine();
+                    }
+                }
+            }
+        }
+
+        //Exercice 4 : Factorielle
+        static int Factorial(int n)
+        {
+            int r = 1;
+
+            if (n == 0)
+            {
+                return 1;
+            }
+
+            for (int i = 1; i <= n; i++)
+            {
+                r *= i;
+            }
+            return r;
+        }
+
+        static int FactorialRecursive(int n)
+        {
+            if (n == 0)
+            {
+                return 1;
+            }
+            return n * FactorialRecursive(n - 1);
+        }
+
+        // Serie 2
+
+        //Exercice 1 : Recherche d'un élément
+        static int LinearSearch(int[] tableau, int valeur)
+        {
+            for (int i = 0; i < tableau.Length - 1; i++)
+            {
+                if (valeur == tableau[i])
+                {
+                    return i;
+                }
+            }
+            return -1;
+        }
+        static int BinarySearch(int[] tableau, int valeur)
+        { 
+
+            int index = Array.BinarySearch(tableau, valeur);
+
+            if (index >= 0)
+            {
+                return index;
+            }
+            else
+            {
+                return -1;
+            }
+        }
+
+        //Exercice 2 : Bases du calcul matriciel
+        static int [,] BuildingMatrix(int[] leftVector, int[] rightVector)
+        {
+            int[,] matrix = new int[leftVector.Length, rightVector.Length];
+
+            for (int i = 0; i < leftVector.Length; i++)
+            {
+                for (int j = 0; j < rightVector.Length; j++)
+                {
+                    matrix[i, j] = leftVector[i] * rightVector[j];
+
+                    Console.Write(matrix[i, j] + " ");
+                }
+                Console.WriteLine();
+            }
+            return matrix;
+        }
+        static int[][] Addition(int[][] leftMatrix, int[][] rightMatrix)
+        {
+
+            int[][] additionMatrix = new int[3][];
+
+            for (int i = 0; i < leftMatrix.Length; i++)
+            {
+                additionMatrix[i] = new int[leftMatrix[0].Length];
+                {
+                    for (int j = 0; j < leftMatrix[i].Length; j++)
+                    {
+                        additionMatrix[i][j] = leftMatrix[i][j] + rightMatrix[i][j];
+
+                        Console.Write(additionMatrix[i][j] + " ");
+                    }
+                    Console.WriteLine();
+                }
+            }
+            return additionMatrix;
+        }
     }
 }
