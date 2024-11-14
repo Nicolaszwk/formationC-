@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Runtime.InteropServices;
@@ -79,6 +80,24 @@ namespace Serie
             Addition(matrix1, matrix2);
             Console.WriteLine(" ");
 
+            Substraction(matrix1, matrix2);
+            Console.WriteLine(" ");
+
+            int[][] matrix3 = new int[][]
+           {
+                new int[] { 1, 2 },
+                new int[] { 4, 6 },
+                new int[] { -1, 8 }
+           };
+
+            int[][] matrix4 = new int[][]
+           {
+                new int[] { -1, 5, 0 },
+                new int[] { -4, 0, 1 },
+           };
+
+
+            Multiplication(matrix3, matrix4);
 
             Console.ReadKey();
         }
@@ -326,5 +345,53 @@ namespace Serie
             }
             return additionMatrix;
         }
+
+        static int[][] Substraction(int[][] leftMatrix, int[][] rightMatrix)
+        {
+
+            int[][] substractionMatrix = new int[3][];
+
+            for (int i = 0; i < leftMatrix.Length; i++)
+            {
+                substractionMatrix[i] = new int[leftMatrix[0].Length];
+                {
+                    for (int j = 0; j < leftMatrix[i].Length; j++)
+                    {
+                        substractionMatrix[i][j] = leftMatrix[i][j] - rightMatrix[i][j];
+
+                        Console.Write(substractionMatrix[i][j] + " ");
+                    }
+                    Console.WriteLine();
+                }
+            }
+            return substractionMatrix;
+        }
+
+        static int[][] Multiplication(int[][] leftMatrix, int[][] rightMatrix)
+        {
+
+            int[][] multiplicationMatrix = new int[3][];
+
+            for (int i = 0; i < leftMatrix.Length; i++)
+            {
+                multiplicationMatrix[i] = new int[rightMatrix[0].Length];
+                {
+                    for (int j = 0; j < rightMatrix[0].Length; j++)
+                    {
+                       for (int k = 0; k < leftMatrix[i].Length; k++)
+                        {
+                            multiplicationMatrix[i][j] += leftMatrix[i][k] * rightMatrix[k][j];
+                        }
+                        Console.Write(multiplicationMatrix[i][j] + " ");
+                    }
+                    Console.WriteLine();
+                }
+            }
+            return multiplicationMatrix;
+        }
+
+        // Serie 3
+
+        //Exercice 1 : Recherche d'un élément
     }
 }
