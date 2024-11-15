@@ -1,12 +1,15 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
+//using static System.Net.WebRequestMethods;
 
 namespace Serie
 {
@@ -98,6 +101,8 @@ namespace Serie
 
 
             Multiplication(matrix3, matrix4);
+
+            SchoolSubjectMean("../../../../../Matieres.txt", "../../../MatieresMean.txt");
 
             Console.ReadKey();
         }
@@ -393,5 +398,30 @@ namespace Serie
         // Serie 3
 
         //Exercice 1 : Recherche d'un élément
+        //static void SchoolSubjectMean(string input, string output)
+        //{
+        //    using (FileStream file1 = File.OpenRead(input))
+
+        //    using (StreamReader file2 = new StreamReader(file1))
+        //    {
+        //        string[] lines = File.ReadAllLines(input);
+
+        //        Dictionary<string, int> dictionnary = new Dictionary<string, int>();
+
+        //        while (!file2.EndOfStream)
+        //        {
+        //            foreach (string line in lines)
+        //            {
+        //                string[] words = line.Split(',');
+        //                int subject = string.Parse(words[2]);
+        //                dictionnary.Add(words[1], subject);
+        //                Console.WriteLine(dictionnary);
+        //            }
+        //        }
+
+        //    }
+        //}
+
+         
     }
 }
