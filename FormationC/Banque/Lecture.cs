@@ -10,15 +10,17 @@ namespace Banque
 {
     public class Lecture
     {
+
+        public Dictionary<uint, decimal> comptesDictionary { get; set; }
         public Dictionary<uint, decimal> LectureComptes(string input)
         {
             if (!File.Exists(input))
             {
                 return null;
             }
-         
+
             // Dictionnaire pour les matières et le nombre des notes
-            Dictionary<uint, decimal> dict1 = new Dictionary<uint, decimal>();
+            comptesDictionary = new Dictionary<uint, decimal>();
             // Ouvrir le fichier
             using (FileStream file1 = File.OpenRead(input))
             // Déclaration de l'outil qui sert à lire le fichier
@@ -33,23 +35,26 @@ namespace Banque
                     }
 
                     if (!decimal.TryParse(ligne[1], out decimal solde)){
-                        dict1.Add(identifiant, 0);
+                        comptesDictionary.Add(identifiant, 0);
                     }
 
-                    if (dict1.ContainsKey(identifiant))
+                    if (comptesDictionary.ContainsKey(identifiant))
                     {
                         continue; 
                     }
                     else
                     {
-                        dict1.Add(identifiant, solde);
+                        comptesDictionary.Add(identifiant, solde);
                     }
                 }
             }
 
-            return dict1;
+            return comptesDictionary;
         }
 
+        //Il faut boucler sur les transactions et à chaque fois faire une nouvelle instance de transaction qui stocke
+        //les infos du montant, du compte1 et du compte2
+        //Ensuite on fait un dico avec la cle qui est l'identifiant et la valeur qui est transaction
         public void LectureTransactions(string input)
         {
             if (!File.Exists(input))
@@ -83,9 +88,7 @@ namespace Banque
                         uint compte1 = identifiant1;
                         uint compte2 = identifiant2;
 
-                        Transaction transaction = new Transaction();
-
-                        transaction.ActionTransaction(soldecompte, compte1, compte2);
+                        Transaction transaction = new Transaction(soldecompte, compte1, compte2);
                     }
                 }
             }

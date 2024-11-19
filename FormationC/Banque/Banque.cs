@@ -8,5 +8,6 @@ namespace Banque
 {
     internal class Banque
     {
+        public Dictionary<uint, decimal> comptesDictionary { get; set; }
     }
 }

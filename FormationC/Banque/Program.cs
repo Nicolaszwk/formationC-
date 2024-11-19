@@ -14,7 +14,8 @@ namespace Banque
             Lecture lecture = new Lecture();
 
             // Appel la methode ReadComptes de la classe Lecture
-            lecture.LectureComptes("../../../../../Comptes.csv");
+            Dictionary<uint, decimal> dictionnaireComptes = lecture.LectureComptes("../../../../../Comptes.csv");
+            //LectureTransactions("../../../../../Comptes.csv");
 
             Console.ReadKey();
         }
