@@ -8,53 +8,20 @@ using System.Threading.Tasks;
 
 namespace Banque
 {
-    internal class Transaction
+    public class Transaction
     {
+        public uint numTransaction { get; set; }
         public decimal montant { get; set; }
-        public uint destinataire { get; set; }
-        public uint expediteur { get; set; }
+        public uint comptebancaire1 { get; set; }
+        public uint comptebancaire2 { get; set; }
 
-        public Transaction(decimal montantcompte, uint compte1, uint compte2)
+        public Transaction(uint numeroTransaction, decimal montantcompte, uint compte1, uint compte2)
         {
+            numTransaction = numeroTransaction;
             montant = montantcompte;
-            destinataire = compte1;
-            expediteur = compte2;
+            comptebancaire1 = compte1;
+            comptebancaire2 = compte2;
         }
 
-           
-
-            //Lecture dict = new Lecture();
-
-            //decimal identifiant = dict.LectureComptes("../../../../../Comptes.csv")[0];
-
-            //if (Dictionary.ContainsKey(identifiant))
-            //{
-
-            //}
-
-            ////depôt
-            //if (compte1 == 0)
-            //{
-
-            //}
-
-            ////retrait
-            //else if (compte2 == 0)
-            //{
-
-            //}
-
-            ////virement/prelevement
-            //else if (compte1 > 0 && compte2 > 0 && compte1 != compte2)
-            //{
-
-            //}
-
-            ////anomalies
-            //else
-            //{
-            //    Console.WriteLine("la transaction ne peut pas s'effectuer");
-            //}
-        //}
     }
 }

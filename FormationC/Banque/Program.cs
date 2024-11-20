@@ -11,11 +11,11 @@ namespace Banque
     {
         static void Main(string[] args)
         {
-            Lecture lecture = new Lecture();
+            Banque banque = new Banque();
 
-            // Appel la methode ReadComptes de la classe Lecture
-            Dictionary<uint, decimal> dictionnaireComptes = lecture.LectureComptes("../../../../../Comptes.csv");
-            //LectureTransactions("../../../../../Comptes.csv");
+            var resultat = banque.Traitementtransactions();
+
+            Ecriture.Write(resultat);
 
             Console.ReadKey();
         }
