@@ -16,9 +16,9 @@ namespace Banque
 
             Lecture lecture = new Lecture();
 
-            dictionnaireComptes = lecture.LectureComptes("../../../../../Comptes.csv");
+            dictionnaireComptes = lecture.LectureComptes("../../../Comptes.csv");
 
-            dictionnaireTransactions = lecture.LectureTransactions("../../../../../Transactions.csv");
+            dictionnaireTransactions = lecture.LectureTransactions("../../../Transactions.csv");
         }
 
         public Dictionary<uint, bool> Traitementtransactions()
@@ -76,10 +76,18 @@ namespace Banque
                 {
                     if (transaction.Value.montant <= dictionnaireComptes[transaction.Value.comptebancaire1])
                     {
-                        dictionnaireComptes[transaction.Value.comptebancaire1] -= transaction.Value.montant;
-                        dictionnaireComptes[transaction.Value.comptebancaire2] += transaction.Value.montant;
+                        if (dictionnaireComptes.ContainsKey(transaction.Value.comptebancaire1) && dictionnaireComptes.ContainsKey(transaction.Value.comptebancaire2))
+                        {
+                            dictionnaireComptes[transaction.Value.comptebancaire1] -= transaction.Value.montant;
+                            dictionnaireComptes[transaction.Value.comptebancaire2] += transaction.Value.montant;
 
                         statut = true;
+                        }
+                        else
+                        {
+                            statut = false;
+                        }
+                        
                     }
                     else
                     {

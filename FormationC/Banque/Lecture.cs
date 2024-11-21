@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Globalization;
 
 namespace Banque
 {
@@ -27,23 +28,31 @@ namespace Banque
 
                 while (!file2.EndOfStream)
                 {
+                   
                     string[] ligne = file2.ReadLine().Split(';');
+
                     if (!uint.TryParse(ligne[0], out uint identifiant))
                     {
                         continue;
                     }
 
-                    if (!decimal.TryParse(ligne[1], out decimal solde)){
+                    
+                    if (!decimal.TryParse(ligne[1],NumberStyles.AllowDecimalPoint,CultureInfo.GetCultureInfo("en-US"), out decimal solde))
+                    {
                         comptesDictionary.Add(identifiant, 0);
                     }
 
-                    if (comptesDictionary.ContainsKey(identifiant))
-                    {
-                        continue; 
-                    }
+                    //if (comptesDictionary.ContainsKey(identifiant))
+                    //{
+                    //    continue; 
+                    //}
                     else
                     {
-                        comptesDictionary.Add(identifiant, solde);
+                        if (!comptesDictionary.ContainsKey(identifiant))
+                        {
+                             comptesDictionary.Add(identifiant, solde);
+                        }
+                       
                     }
                 }
             }
@@ -71,7 +80,8 @@ namespace Banque
                     {
                         continue;
                     }
-                    if (!decimal.TryParse(ligne[1], out decimal montant))
+                    
+                    if (!decimal.TryParse(ligne[1],NumberStyles.AllowDecimalPoint,CultureInfo.GetCultureInfo("en-US"), out decimal montant))
                     {
                         continue;
                     }
@@ -82,6 +92,10 @@ namespace Banque
                     if (!uint.TryParse(ligne[3], out uint compte2))
                     {
                         continue;
+                    }
+                     if (transactionsDictionary.ContainsKey(numtransaction))
+                    {
+                        break; 
                     }
                     else
                     {

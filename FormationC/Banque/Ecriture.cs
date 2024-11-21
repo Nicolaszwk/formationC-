@@ -11,7 +11,7 @@ namespace Banque
     {
         public static void Write(Dictionary<uint, bool> dict1)
         {
-            using (FileStream file3 = File.Create("../../../../../Resultats_transactions.csv"))
+            using (FileStream file3 = File.Create("../../../Resultats_transactions.csv"))
             using (StreamWriter file4 = new StreamWriter(file3))
             {
                 foreach (KeyValuePair<uint, bool> item in dict1)
