@@ -1,0 +1,4 @@
+Nombre de comptes : 4
+Nombre de transactions : 14
+Nombre de réussites : 11
+Nombre d'échecs : 3
